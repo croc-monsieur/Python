@@ -1,0 +1,49 @@
+# -*- coding: utf -*-
+#Variables
+i = 1;
+Count = 0;
+NbEssais = 10;
+NbLettreTrouve = 0;
+Resultat= ['-','-','-','-'];
+Test = "FALSE";
+
+#Mot inscrit par l'utilisateur
+Mot = str(input("entre ton mot: ")).upper();
+
+#On crée un tableau de la même taille que le mot en entrée. Rempli avec des tirets -
+TailleDuMot = len(Mot)
+Resultat = ["-" for _ in range(TailleDuMot)]
+
+#Début du pendu
+while i < NbEssais and Test == "FALSE":
+
+    Lettre = str(input("Quelle lettre?"));
+    Lettre = Lettre.upper();
+    Count = 0;
+
+    #Si la lettre a déjà été proposée on ne parcourt pas le mot
+    if Lettre not in Resultat:
+        # on parcourt le mot
+        while Count < TailleDuMot:
+            if Lettre == Mot[Count]:
+                NbLettreTrouve = NbLettreTrouve + 1;
+                # on range la lettre dans le tableau resultat à la position(count) obtenue lorsqu'on parcourt le mot
+                Resultat[Count] = Lettre;
+                Count = Count +1;
+            else:
+                Count = Count + 1;
+
+    if NbLettreTrouve == TailleDuMot:
+        Test = "OK";
+    else:
+        i = i + 1;
+
+    print(NbLettreTrouve, " Lettres trouvées.");
+    print("il te reste " + str(NbEssais - i) + " Essais");
+    print("".join(Resultat));
+
+
+if Test == "FALSE":
+    print("Essaye encore frr")
+else:
+   print("bien joué, tu as trouvé en " + str(i) + " essais");
